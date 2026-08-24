@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PricingCard } from './PricingCard';
 
 export function Pricing() {
   const features = [
+    "All limited links",
+    "Own analytics platform",
+    "Chat support",
+    "Optimize hashtags",
+    "Unlimited users"
+  ];
+    const Profeatures = [
+    "All limited links",
+    "Own analytics platform",
+    "Chat support",
+    "Optimize hashtags",
+    "Unlimited users"
+  ];
+    const EnterPrisefeatures = [
     "All limited links",
     "Own analytics platform",
     "Chat support",
@@ -43,7 +57,7 @@ export function Pricing() {
             title="Pro"
             price="120"
             description="For most businesses that want to optimize web queries"
-            features={features}
+            features={Profeatures}
             isPopular={true}
             buttonText="Upgrade"
           />
@@ -51,7 +65,7 @@ export function Pricing() {
             title="Enterprise"
             price="260"
             description="For most businesses that want to optimize web queries"
-            features={features}
+            features={EnterPrisefeatures}
             buttonText="Upgrade"
           />
         </div>

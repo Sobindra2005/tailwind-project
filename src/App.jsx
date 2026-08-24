@@ -1,9 +1,9 @@
-import { Pricing } from './components/Pricing';
+import { ShoppingCart } from "./components/shoppingCart";
 
 function App() {
   return (
     <>
-      <Pricing />
+      <ShoppingCart/>
     </>
   );
 }
