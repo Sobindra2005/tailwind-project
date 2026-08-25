@@ -2,10 +2,10 @@ import { useState } from "react"
 import { initialItems } from "../data"
 import { CartItem } from "./Item"
 
+const discount_percentage = 10
+
 export function ShoppingCart() {
     const [items, setItems] = useState(initialItems)
-
-    // console.log({...items[0],quantity:10,title:"hii"})
 
     function handleItemQuantity(id, quantity) {
         const newItems = items.map(item => {
@@ -28,6 +28,11 @@ export function ShoppingCart() {
         setItems(arrayItems)
     }
 
+    const SubTotal = items.reduce((sum, item) => { return sum + (item.quantity * item.price) }, 0);
+    const discount = (discount_percentage / 100) * SubTotal;
+    const DeliveryFee = 100;
+    const total = SubTotal - discount + DeliveryFee
+
     // handleItemQuantity(2, 10)
     // deleteItem(2)
 
@@ -46,7 +51,9 @@ export function ShoppingCart() {
                         </div>
                         <div>
                             {
-                                items.map(item => <CartItem key={item.id} item={item} />)
+                                items.length > 0 ? items.map(item => <CartItem key={item.id} item={item} deleteItem={deleteItem} handleItemQuantity={handleItemQuantity} />)
+                                    :
+                                    <p> No Product </p>
                             }
                         </div>
                     </div>
@@ -62,19 +69,19 @@ export function ShoppingCart() {
                             <div>
                                 <div className="flex justify-between items-center text-sm">
                                     <span className="text-gray-600">Sub Total</span>
-                                    <span className="font-semibold text-gray-900">100</span>
+                                    <span className="font-semibold text-gray-900">{SubTotal.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between items-center text-sm">
                                     <span className="text-gray-600">Discount (10%)</span>
-                                    <span className="font-semibold text-gray-900">100</span>
+                                    <span className="font-semibold text-gray-900">{discount.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between items-center text-sm">
                                     <span className="text-gray-600">Delivery fee</span>
-                                    <span className="font-semibold text-gray-900">100</span>
+                                    <span className="font-semibold text-gray-900">{DeliveryFee}</span>
                                 </div>
                                 <div className="flex justify-between items-center text-sm">
                                     <span className="text-gray-600">Total</span>
-                                    <span className="font-semibold text-gray-900">100</span>
+                                    <span className="font-semibold text-gray-900">{total.toFixed(2)}</span>
                                 </div>
 
                             </div>
