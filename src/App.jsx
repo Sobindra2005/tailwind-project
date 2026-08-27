@@ -1,11 +1,9 @@
-import { ShoppingCart } from "./components/shoppingCart";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 
 function App() {
   return (
-    <>
-      <ShoppingCart/>
-  
-    </>
+    <Login />
   );
 }
 
