@@ -1,22 +1,41 @@
 import { useState } from "react";
 
-function Signup() {
+export function Signup() {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    })
+    const [isSubmitted, setIsSubmitted] = useState(false)
+
+    const variable = 'sobhindra@!12'
+    const pattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/
+
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        if (formData.password.length < 8) {
+            console.log("password length must be greater than 8")
+            return;
+        }
+        else if (!pattern.test(formData.password)) {
+            console.log("pattern not match!!!")
+            return;
+        } else if (formData.password !== formData.confirmPassword) {
+            console.log("password and confirm Password should have same value")
+            return;
+        }
+
+        setIsSubmitted(true)
+    }
 
 
     return (
         <main className="flex min-h-screen items-center justify-center bg-stone-100 px-6 py-12 text-stone-900">
             <section className="w-full max-w-sm rounded-2xl border border-stone-200 bg-white p-8 shadow-sm">
-                <div className="mb-8">
-                    <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-amber-700">
-                        Get started
-                    </p>
-                    <h1 className="text-3xl font-semibold tracking-tight">Create account</h1>
-                    <p className="mt-2 text-sm leading-6 text-stone-500">
-                        Fill in your details to create an account.
-                    </p>
-                </div>
 
-                <form className="space-y-5" >
+                <form className="space-y-5" onSubmit={handleSubmit}>
                     <div>
                         <label className="mb-2 block text-sm font-medium" htmlFor="name">
                             Name
@@ -28,6 +47,8 @@ function Signup() {
                             placeholder="Alex Morgan"
                             required
                             type="text"
+                            value={formData.name}
+                            onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
                         />
                     </div>
 
@@ -42,6 +63,8 @@ function Signup() {
                             placeholder="you@example.com"
                             required
                             type="email"
+                            value={formData.email}
+                            onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
                         />
                     </div>
 
@@ -56,6 +79,8 @@ function Signup() {
                             placeholder="Create a password"
                             required
                             type="password"
+                            value={formData.password}
+                            onChange={(e) => setFormData((prev) => ({ ...prev, password: e.target.value }))}
                         />
                     </div>
 
@@ -70,6 +95,8 @@ function Signup() {
                             placeholder="Repeat your password"
                             required
                             type="password"
+                            value={formData.confirmPassword}
+                            onChange={(e) => setFormData((prev) => ({ ...prev, confirmPassword: e.target.value }))}
                         />
                     </div>
 
@@ -80,14 +107,13 @@ function Signup() {
                         Create account
                     </button>
                 </form>
-
-                <p className="mt-5 rounded-lg bg-emerald-50 px-3 py-2 text-center text-sm text-emerald-800">
-                    Account created for "here name".
-                </p>
+                {isSubmitted &&
+                    <p className="mt-5 rounded-lg bg-emerald-50 px-3 py-2 text-center text-sm text-emerald-800">
+                        Account created for {formData.name}.
+                    </p>}
 
             </section>
         </main>
     );
 }
 
-export default Signup;
