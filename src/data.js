@@ -1,26 +1,32 @@
-export const initialItems = [
+export const products = [
   {
     id: 1,
-    title: 'Furniture Set',
-    subtitle: 'Set : Colour: Coffee',
-    price: 109.25,
-    quantity: 4,
-    image: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&w=300&q=80'
+    name: 'Canvas Backpack',
+    category: 'Bags',
+    price: 48.00,
   },
   {
     id: 2,
-    title: 'Vintage Dining Set',
-    subtitle: 'Set : Colour: Brown',
-    price: 472.5,
-    quantity: 2,
-    image: 'https://images.unsplash.com/photo-1617325247661-675ab034a77d?auto=format&fit=crop&w=300&q=80'
+    name: 'Ceramic Coffee Mug',
+    category: 'Kitchen',
+    price: 16.50,
   },
   {
     id: 3,
-    title: 'Studio Chair',
-    subtitle: 'Set : Colour: Deep Green',
-    price: 85.285,
-    quantity: 7,
-    image: 'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=300&q=80'
-  }
+    name: 'Everyday Notebook',
+    category: 'Stationery',
+    price: 12.00,
+  },
+  {
+    id: 4,
+    name: 'Linen Table Lamp',
+    category: 'Home',
+    price: 72.00,
+  },
+  {
+    id: 5,
+    name: 'Wool Knit Scarf',
+    category: 'Accessories',
+    price: 34.00,
+  },
 ];
