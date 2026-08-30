@@ -48,8 +48,6 @@ export function MainContent() {
             <section className="board-container" id="board">
                 {Boards.map(board => {
                     let boardTask = board.value === "todo" ? Todo : board.value === "in-progress" ? InProgress : Done
-
-                    console.log(board.value , boardTask)
                     return <Board key={board.value} data={board} tasks={boardTask} />
                 })}
             </section>

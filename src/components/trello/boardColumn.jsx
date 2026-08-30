@@ -1,6 +1,8 @@
 import { TaskCard } from "./task";
 
-export function Board({ data }) {
+export function Board({ data ,tasks }) {
+
+    console.log(data.value , tasks )
  
     return (
         <div className={`board-column col-${data.value}`}>
