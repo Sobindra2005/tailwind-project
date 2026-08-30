@@ -9,8 +9,12 @@ const Boards = [
 ]
 
 export function MainContent() {
-    const [task, setTask] = useState(initialTasks)
-    
+    const [tasks, setTask] = useState(initialTasks)
+
+    const Todo = tasks.filter(task=> task.status === 'todo')
+    const InProgress = tasks.filter(task=> task.status === 'in-progress')
+    const Done = tasks.filter(task=> task.status === 'done')
+
     return (
         <main className="main-content">
             <header className="topbar border-b border-gray-700">
@@ -42,7 +46,7 @@ export function MainContent() {
             </div>
 
             <section className="board-container" id="board">
-                {Boards.map(board => <Board key={board.value} data={board} />)}
+                {Boards.map(board => <Board key={board.value} data={board} tasks />)}
             </section>
         </main>
     )
