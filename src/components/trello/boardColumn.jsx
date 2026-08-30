@@ -1,6 +1,7 @@
 import { TaskCard } from "./task";
 
-export function Board({data}) {
+export function Board({ data }) {
+ 
     return (
         <div className={`board-column col-${data.value}`}>
             <div className="board-header">

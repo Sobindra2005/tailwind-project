@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Board } from "./boardColumn";
+import { initialTasks } from './data'
 
 const Boards = [
     { value: 'todo', label: 'To Do' },
@@ -7,6 +9,8 @@ const Boards = [
 ]
 
 export function MainContent() {
+    const [task, setTask] = useState(initialTasks)
+    
     return (
         <main className="main-content">
             <header className="topbar border-b border-gray-700">
