@@ -1,12 +1,12 @@
 import { TaskCard } from "./task";
 
-export function Board() {
+export function Board({data}) {
     return (
-        <div className={`board-column col-todo`}>
+        <div className={`board-column col-${data.value}`}>
             <div className="board-header">
                 <div className="header-left">
-                    <span className={`dot dot-todo`}></span>
-                    <h2>{'To do'}</h2>
+                    <span className={`dot dot-${data.value}`}></span>
+                    <h2>{data.label}</h2>
                 </div>
                 <button className="more-btn">•••</button>
             </div>

@@ -1,5 +1,11 @@
 import { Board } from "./boardColumn";
 
+const Boards = [
+    { value: 'todo', label: 'To Do' },
+    { value: 'in-progress', label: 'In Progress' },
+    { value: 'done', label: 'Done' }
+]
+
 export function MainContent() {
     return (
         <main className="main-content">
@@ -32,7 +38,7 @@ export function MainContent() {
             </div>
 
             <section className="board-container" id="board">
-                <Board />
+                {Boards.map(board => <Board key={board.value} data={board} />)}
             </section>
         </main>
     )
