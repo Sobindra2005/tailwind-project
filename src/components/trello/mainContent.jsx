@@ -15,7 +15,11 @@ export function MainContent() {
     const InProgress = tasks.filter(task => task.status === 'in-progress')
     const Done = tasks.filter(task => task.status === 'done')
 
-    
+    function deleteTask(id) {
+        const updatedTask = tasks.filter(task => task.id !== id)
+        console.log(updatedTask)
+        setTask(updatedTask)
+    }
 
     return (
         <main className="main-content">
@@ -50,7 +54,7 @@ export function MainContent() {
             <section className="board-container" id="board">
                 {Boards.map(board => {
                     let boardTask = board.value === "todo" ? Todo : board.value === "in-progress" ? InProgress : Done
-                    return <Board key={board.value} data={board} tasks={boardTask} />
+                    return <Board key={board.value} data={board} tasks={boardTask} deleteTask={deleteTask} />
                 })}
             </section>
         </main>

@@ -1,4 +1,4 @@
-export function TaskCard({task}) {
+export function TaskCard({ task, deleteTask }) {
     console.log(task)
     return (
         <div
@@ -16,6 +16,7 @@ export function TaskCard({task}) {
                 <button
                     type="button"
                     className="delete-task-btn"
+                    onClick={()=>deleteTask(task.id)}
                 >
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M9 3h6l1 2h4v2H4V5h4l1-2zm-2 6h2v9H7V9zm4 0h2v9h-2V9zm4 0h2v9h-2V9z" />
