@@ -1,17 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
-import { products } from '../data';
+import { productsSearch } from '../data';
 
 export function ProductSearchQn() {
     const [query, setQuery] = useState('');
-    const [filteredProducts, setFilteredProducts] = useState(products);
+    const [filteredProducts, setFilteredProducts] = useState(productsSearch);
     const inputRef = useRef(null);
 
     useEffect(() => {
+        const searchTerm = query.trim().toLowerCase();
 
-    }, []);
+        setFilteredProducts(
+            productsSearch.filter((product) =>
+                `${product.name} ${product.category}`.toLowerCase().includes(searchTerm)
+            )
+        );
+    }, [query]);
 
     function clearSearch() {
-
+        setQuery('')
+        inputRef.current.focus()
     }
     return (
         <main className="min-h-screen bg-stone-100 px-4 py-12 text-stone-900 sm:px-6">

@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { products } from '../data';
+import { productsSearch } from '../data';
 
 export function ProductSearch() {
   const [query, setQuery] = useState('');
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [filteredProducts, setFilteredProducts] = useState(productsSearch);
   const inputRef = useRef(null);
 
   useEffect(() => {
     const searchTerm = query.trim().toLowerCase();
 
     setFilteredProducts(
-      products.filter((product) =>
+      productsSearch.filter((product) =>
         `${product.name} ${product.category}`.toLowerCase().includes(searchTerm)
       )
     );

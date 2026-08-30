@@ -1,4 +1,4 @@
-export const products = [
+export const productsSearch = [
   {
     id: 1,
     name: 'Canvas Backpack',
