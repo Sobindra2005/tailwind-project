@@ -15,6 +15,8 @@ export function MainContent() {
     const InProgress = tasks.filter(task => task.status === 'in-progress')
     const Done = tasks.filter(task => task.status === 'done')
 
+    
+
     return (
         <main className="main-content">
             <header className="topbar border-b border-gray-700">
