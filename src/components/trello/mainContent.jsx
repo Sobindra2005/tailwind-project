@@ -11,9 +11,9 @@ const Boards = [
 export function MainContent() {
     const [tasks, setTask] = useState(initialTasks)
 
-    const Todo = tasks.filter(task=> task.status === 'todo')
-    const InProgress = tasks.filter(task=> task.status === 'in-progress')
-    const Done = tasks.filter(task=> task.status === 'done')
+    const Todo = tasks.filter(task => task.status === 'todo')
+    const InProgress = tasks.filter(task => task.status === 'in-progress')
+    const Done = tasks.filter(task => task.status === 'done')
 
     return (
         <main className="main-content">
@@ -46,7 +46,12 @@ export function MainContent() {
             </div>
 
             <section className="board-container" id="board">
-                {Boards.map(board => <Board key={board.value} data={board} tasks />)}
+                {Boards.map(board => {
+                    let boardTask = board.value === "todo" ? Todo : board.value === "in-progress" ? InProgress : Done
+
+                    console.log(board.value , boardTask)
+                    return <Board key={board.value} data={board} tasks={boardTask} />
+                })}
             </section>
         </main>
     )
