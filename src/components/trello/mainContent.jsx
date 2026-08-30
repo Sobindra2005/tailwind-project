@@ -1,3 +1,5 @@
+import { Board } from "./boardColumn";
+
 export function MainContent() {
     return (
         <main className="main-content">
@@ -29,7 +31,9 @@ export function MainContent() {
                 </div>
             </div>
 
-
+            <section className="board-container" id="board">
+                <Board />
+            </section>
         </main>
     )
 }
