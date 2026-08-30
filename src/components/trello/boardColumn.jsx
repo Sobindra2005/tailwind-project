@@ -1,3 +1,5 @@
+import { TaskCard } from "./task";
+
 export function Board() {
     return (
         <div className={`board-column col-todo`}>
@@ -12,10 +14,11 @@ export function Board() {
             <div
                 className={`task-list `}
             >
-                {true? (
+                {false ? (
                     <p className="empty-state">No tasks yet.</p>
                 ) : (
                     <>
+                        <TaskCard />
                     </>
                 )}
             </div>
@@ -23,7 +26,7 @@ export function Board() {
             {true ? (
                 <button
                     className="add-task-btn"
-                   
+
                 >
                     + Add Task
                 </button>
@@ -33,7 +36,7 @@ export function Board() {
                         type="text"
                         name="title"
                         placeholder="Task title..."
-                      
+
                         required
                         autoFocus
                     />
