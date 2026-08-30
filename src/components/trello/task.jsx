@@ -1,17 +1,17 @@
-export function TaskCard() {
+export function TaskCard({task}) {
+    console.log(task)
     return (
         <div
             className={`task-card `}
-            draggable="true"
         >
-            <p className="task-title mb-1">{"task title"}</p>
-            <p className="task-description mb-2">{"task description"}</p>
+            <p className="task-title mb-1">{task.title}</p>
+            <p className="task-description mb-2">{task.description}</p>
             <div className="d-flex align-items-center justify-content-between gap-2">
                 <span
-                    className={`status-badge status-todo`}
-                    aria-label={`Status: Todo`}
+                    className={`status-badge status-${task.status}`}
+                    aria-label={`Status: ${task.status}`}
                 >
-                    {"To do"}
+                    {task.status}
                 </span>
                 <button
                     type="button"

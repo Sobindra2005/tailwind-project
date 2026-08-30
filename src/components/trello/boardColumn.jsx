@@ -1,9 +1,9 @@
 import { TaskCard } from "./task";
 
-export function Board({ data ,tasks }) {
+export function Board({ data, tasks }) {
 
-    console.log(data.value , tasks )
- 
+    console.log(data.value, tasks)
+
     return (
         <div className={`board-column col-${data.value}`}>
             <div className="board-header">
@@ -20,8 +20,8 @@ export function Board({ data ,tasks }) {
                 {false ? (
                     <p className="empty-state">No tasks yet.</p>
                 ) : (
-                    <>
-                        <TaskCard />
+                    <>{tasks.map(task => <TaskCard key={task.id} task={task} />)
+                    }
                     </>
                 )}
             </div>
