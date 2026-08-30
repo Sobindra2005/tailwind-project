@@ -1,0 +1,579 @@
+/* ── Reset ──────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-layout {
+  display: flex;
+  height: 100vh;
+}
+
+/* ── Sidebar ────────────────────────────────────────────────── */
+.sidebar {
+  width: 80px;
+  background-color: var(--bg-sidebar);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 0;
+  border-right: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, #6366f1, #818cf8);
+  border-radius: 8px;
+  margin-bottom: 40px;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.nav-item {
+  color: var(--text-secondary);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  color: var(--accent);
+  background-color: var(--accent-light);
+}
+
+.nav-item.active {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+/* ── Main Content ───────────────────────────────────────────── */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Topbar ─────────────────────────────────────────────────── */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 36px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-surface);
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-main);
+  padding: 8px 16px;
+  border-radius: 24px;
+  width: 300px;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  transition: border-color 0.2s;
+}
+
+.search-bar:focus-within {
+  border-color: var(--accent);
+}
+
+.search-bar input {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  outline: none;
+  margin-left: 10px;
+  flex: 1;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.search-bar input::placeholder {
+  color: var(--text-secondary);
+}
+
+.search-bar .shortcut {
+  font-size: 12px;
+  background-color: var(--border-color);
+  color: var(--text-secondary);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.avatar-group {
+  display: flex;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--border-color);
+  border: 2px solid var(--bg-surface);
+  margin-left: -8px;
+  background-size: cover;
+}
+
+.avatar:first-child {
+  margin-left: 0;
+  background-image: url('https://i.pravatar.cc/100?img=1');
+}
+
+.avatar:nth-child(2) {
+  background-image: url('https://i.pravatar.cc/100?img=2');
+}
+
+.avatar:nth-child(3) {
+  background-image: url('https://i.pravatar.cc/100?img=3');
+}
+
+/* ── Project Header ─────────────────────────────────────────── */
+.project-header {
+  padding: 24px 36px 0;
+}
+
+.project-header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.4px;
+}
+
+.project-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  margin-bottom: 0;
+}
+
+.meta-item strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.menu-item-second strong {
+  color:#55225c ;
+  font-weight: bold;
+}
+
+.status-pill {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #10b981;
+}
+
+/* ── Board Container ────────────────────────────────────────── */
+.board-container {
+  display: flex;
+  gap: 20px;
+  padding: 24px 36px;
+  overflow: hidden;         /* no page-level scrollbar at all */
+  flex: 1;
+  align-items: stretch;     /* columns fill the full height of the container */
+  min-height: 0;            /* allow flex child to shrink */
+}
+
+/* ── Board Columns ──────────────────────────────────────────── */
+.board-column {
+  flex: 0 0 320px;              /* grow equally, share all available width */
+  min-width: 0;             /* allow flex items to shrink below content size */
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  overflow: hidden;         /* clip internally; task-list scrolls inside */
+}
+
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Dot → small colored square icon (matches image) */
+.dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.dot-todo {
+  background-color: var(--todo);
+}
+
+.dot-in-progress {
+  background-color: var(--wip);
+}
+
+.dot-done {
+  background-color: var(--done);
+}
+
+.board-header h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.more-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 18px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: background 0.15s;
+  line-height: 1;
+}
+
+.more-btn:hover {
+  background-color: var(--border-color);
+}
+
+/* ── Task List ──────────────────────────────────────────────── */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 50px;
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 4px;
+  /* Required for flex children to shrink and scroll properly */
+  min-height: 0;
+}
+
+.task-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.task-list::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 4px;
+}
+
+.empty-state {
+  color: var(--text-secondary);
+  font-size: 13px;
+  text-align: center;
+  padding: 24px 0;
+}
+
+/* ── Task Cards ─────────────────────────────────────────────── */
+.task-card {
+  background-color: var(--bg-surface);
+  border-radius: 12px;
+  padding: 16px 16px 14px;
+  cursor: grab;
+  transition: transform 0.18s, box-shadow 0.18s;
+  box-shadow: 0 1px 4px rgba(17, 24, 39, 0.07);
+  border: 1px solid var(--border-color);
+  /* Thick left accent border — overridden per column below */
+  border-left-width: 4px;
+}
+
+/* Per-column left accent */
+.col-todo .task-card {
+  border-left-color: var(--todo);
+}
+
+.col-todo {
+  background-color: var(--todo-background);
+}
+
+.col-in-progress .task-card {
+  border-left-color: var(--wip);
+}
+
+.col-in-progress{
+  background-color: var(--wip-background);
+}
+
+.col-done .task-card {
+  border-left-color: var(--done);
+}
+
+.col-done {
+  background-color: var(--done-background);
+}
+
+.task-card:active {
+  cursor: grabbing;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(17, 24, 39, 0.10);
+}
+
+.task-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  line-height: 1.45;
+}
+
+.task-description {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Card footer */
+.d-flex.align-items-center.justify-content-between.gap-2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-color);
+  padding-top: 10px;
+}
+
+/* ── Status Badges ──────────────────────────────────────────── */
+.status-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 3px 8px;
+  border-radius: 5px;
+}
+
+.status-todo {
+  color: var(--todo);
+  background-color: var(--todo-light);
+}
+
+.status-in-progress {
+  color: var(--wip);
+  background-color: var(--wip-light);
+}
+
+.status-done {
+  color: var(--done);
+  background-color: var(--done-light);
+}
+
+/* ── Delete Button ──────────────────────────────────────────── */
+.delete-task-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+.delete-task-btn:hover {
+  background-color: rgba(244, 63, 114, 0.10);
+  color: var(--todo);
+}
+
+.delete-task-btn svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+}
+
+/* ── Add Task Button ────────────────────────────────────────── */
+.add-task-btn {
+  background: transparent;
+  border: 1.5px dashed var(--border-color);
+  color: var(--text-secondary);
+  padding: 11px;
+  border-radius: 10px;
+  margin-top: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13.5px;
+  transition: all 0.2s;
+  width: 100%;
+  font-family: inherit;
+}
+
+/* Per-column colored border + text */
+.col-todo .add-task-btn {
+  border-color: var(--todo);
+  color: var(--todo);
+}
+
+.col-in-progress .add-task-btn {
+  border-color: var(--wip);
+  color: var(--wip);
+}
+
+.col-done .add-task-btn {
+  border-color: var(--done);
+  color: var(--done);
+}
+
+.col-todo .add-task-btn:hover {
+  background-color: var(--todo-light);
+}
+
+.col-in-progress .add-task-btn:hover {
+  background-color: var(--wip-light);
+}
+
+.col-done .add-task-btn:hover {
+  background-color: var(--done-light);
+}
+
+/* ── Inline Task Form ───────────────────────────────────────── */
+.d-none {
+  display: none !important;
+}
+
+.inline-task-form {
+  background-color: var(--bg-surface);
+  padding: 14px;
+  border-radius: 10px;
+  margin-top: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(17, 24, 39, 0.06);
+}
+
+.inline-task-form input,
+.inline-task-form textarea {
+  width: 100%;
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  padding: 8px 12px;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  font-family: inherit;
+  font-size: 13px;
+  transition: border-color 0.2s;
+}
+
+.inline-task-form input:focus,
+.inline-task-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-save {
+  background-color: var(--accent);
+  color: #ffffff;
+  border: none;
+  padding: 7px 18px;
+  border-radius: 7px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s;
+}
+
+.btn-save:hover {
+  opacity: 0.88;
+}
+
+.btn-cancel {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  padding: 7px 18px;
+  border-radius: 7px;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.btn-cancel:hover {
+  background-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* ── Drag State ─────────────────────────────────────────────── */
+.task-card.is-placeholder {
+  opacity: 0.25;
+  border-style: dashed;
+}
+
+.task-list.drop-target {
+  background-color: rgba(99, 102, 241, 0.05);
+  border-radius: 10px;
+  outline: 2px dashed rgba(99, 102, 241, 0.3);
+}
+
+.is-drag-preview {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 12px 32px rgba(17, 24, 39, 0.18);
+}

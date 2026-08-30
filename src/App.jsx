@@ -1,9 +1,7 @@
-
-
-import { ProductSearchQn } from './components/ProductSearch_qn';
+import { Main } from "./components/trello/mainTrello";
 
 function App() {
-  return <ProductSearchQn />;
+  return <Main />;
 }
 
 export default App;

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { initialItems } from "../data"
+import { initialItems } from "../../data"
 import { CartItem } from "./Item"
 
 const discount_percentage = 10

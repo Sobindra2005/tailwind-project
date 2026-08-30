@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { productsSearch } from '../data';
+import { productsSearch } from '../../data';
 
 export function ProductSearchQn() {
     const [query, setQuery] = useState('');
