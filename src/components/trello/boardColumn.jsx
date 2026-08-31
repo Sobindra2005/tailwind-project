@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { TaskCard } from "./task";
 
 export function Board({ data, tasks, deleteTask, addTask }) {
@@ -7,6 +7,7 @@ export function Board({ data, tasks, deleteTask, addTask }) {
         title: '',
         description: ''
     })
+    const DraggedTaskId = useRef(null)
 
     const handleSaveTask = (e) => {
         e.preventDefault();
@@ -34,7 +35,7 @@ export function Board({ data, tasks, deleteTask, addTask }) {
                 {false ? (
                     <p className="empty-state">No tasks yet.</p>
                 ) : (
-                    <>{tasks.map(task => <TaskCard key={task.id} task={task} deleteTask={deleteTask} />)
+                    <>{tasks.map(task => <TaskCard key={task.id} DraggedTaskId={DraggedTaskId} task={task} deleteTask={deleteTask} />)
                     }
                     </>
                 )}

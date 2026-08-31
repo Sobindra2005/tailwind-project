@@ -14,6 +14,8 @@ export function MainContent() {
     const Todo = tasks.filter(task => task.status === 'todo')
     const InProgress = tasks.filter(task => task.status === 'in-progress')
     const Done = tasks.filter(task => task.status === 'done')
+    
+
 
     function deleteTask(id) {
         const updatedTask = tasks.filter(task => task.id !== id)

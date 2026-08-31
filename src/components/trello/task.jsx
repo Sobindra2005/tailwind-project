@@ -1,9 +1,20 @@
-export function TaskCard({ task, deleteTask }) {
+export function TaskCard({ task, deleteTask, DraggedTaskId }) {
     console.log(task)
+
+    const handleDrag = () => {
+        DraggedTaskId.current = task.id
+    }
+
+    const handleDragEnd = () => {
+        DraggedTaskId.current = null;
+    }
+
     return (
         <div
             draggable
             className={`task-card `}
+            onDragStart={handleDrag}
+            onDragEnd={handleDragEnd}
         >
             <p className="task-title mb-1">{task.title}</p>
             <p className="task-description mb-2">{task.description}</p>
