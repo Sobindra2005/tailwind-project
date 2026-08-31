@@ -11,7 +11,11 @@ export function Board({ data, tasks, deleteTask, addTask }) {
     const handleSaveTask = (e) => {
         e.preventDefault();
         addTask(form.title, form.description, data.value);
-        
+        setForm({
+            title: '',
+            description: ''
+        })
+        setIsFormActive(false)
     }
 
     return (
