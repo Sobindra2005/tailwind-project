@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Board } from "./boardColumn";
 import { initialTasks } from './data'
 
@@ -10,11 +10,11 @@ const Boards = [
 
 export function MainContent() {
     const [tasks, setTask] = useState(initialTasks)
-
+    const DraggedTaskId = useRef(null)
+    
     const Todo = tasks.filter(task => task.status === 'todo')
     const InProgress = tasks.filter(task => task.status === 'in-progress')
     const Done = tasks.filter(task => task.status === 'done')
-    
 
 
     function deleteTask(id) {
@@ -24,6 +24,20 @@ export function MainContent() {
 
     function addTask(title, description, status) {
         setTask((prev) => [...prev, { id: Date.now(), title, description, status }])
+    }
+
+    function updateTaskStatus(taskId, status) {
+        const updatedTask = tasks.map(task => {
+            if (taskId === task.id) {
+                return {
+                    ...task, status: status
+                }
+            }
+
+            return task;
+        })
+        setTask(updatedTask)
+
     }
 
     return (
@@ -59,7 +73,7 @@ export function MainContent() {
             <section className="board-container" id="board">
                 {Boards.map(board => {
                     let boardTask = board.value === "todo" ? Todo : board.value === "in-progress" ? InProgress : Done
-                    return <Board key={board.value} data={board} tasks={boardTask} deleteTask={deleteTask} addTask={addTask} />
+                    return <Board key={board.value} DraggedTaskId={DraggedTaskId} data={board} tasks={boardTask} deleteTask={deleteTask} addTask={addTask} updateTaskStatus={updateTaskStatus} />
                 })}
             </section>
         </main>

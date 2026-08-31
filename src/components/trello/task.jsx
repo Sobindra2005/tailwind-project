@@ -1,12 +1,13 @@
 export function TaskCard({ task, deleteTask, DraggedTaskId }) {
-    console.log(task)
 
     const handleDrag = () => {
+        console.log("this is running")
         DraggedTaskId.current = task.id
+        console.log(DraggedTaskId)
     }
 
     const handleDragEnd = () => {
-        DraggedTaskId.current = null;
+        // DraggedTaskId.current = null;
     }
 
     return (

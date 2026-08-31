@@ -1,13 +1,14 @@
 import { useRef, useState } from "react";
 import { TaskCard } from "./task";
 
-export function Board({ data, tasks, deleteTask, addTask }) {
+export function Board({ data, tasks, deleteTask, addTask, updateTaskStatus , DraggedTaskId }) {
     const [isFormActive, setIsFormActive] = useState(false)
     const [form, setForm] = useState({
         title: '',
         description: ''
     })
-    const DraggedTaskId = useRef(null)
+    
+    const [isDragOver, setIsDragOver] = useState(false)
 
     const handleSaveTask = (e) => {
         e.preventDefault();
@@ -17,6 +18,20 @@ export function Board({ data, tasks, deleteTask, addTask }) {
             description: ''
         })
         setIsFormActive(false)
+    }
+
+    const handleDrop = () => {
+        console.log(DraggedTaskId, data.value)
+        updateTaskStatus(DraggedTaskId.current, data.value)
+    }
+
+    const handleDragOver = (e) => {
+        e.preventDefault()
+        setIsDragOver(true)
+    }
+
+    const handleDragEnd = () => {
+        setIsDragOver(false)
     }
 
     return (
@@ -30,9 +45,12 @@ export function Board({ data, tasks, deleteTask, addTask }) {
             </div>
 
             <div
-                className={`task-list `}
+                className={`task-list ${isDragOver ? 'drop-target' : ''}`}
+                onDragOver={handleDragOver}
+                onDragEnd={handleDragEnd}
+                onDrop={handleDrop}
             >
-                {false ? (
+                {tasks.length === 0 ? (
                     <p className="empty-state">No tasks yet.</p>
                 ) : (
                     <>{tasks.map(task => <TaskCard key={task.id} DraggedTaskId={DraggedTaskId} task={task} deleteTask={deleteTask} />)
