@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { TaskCard } from "./task";
 
 export function Board({ data, tasks, deleteTask }) {
+    const [isFormActive, setIsFormActive] = useState(false)
 
     return (
         <div className={`board-column col-${data.value}`}>
@@ -24,10 +26,10 @@ export function Board({ data, tasks, deleteTask }) {
                 )}
             </div>
 
-            {true ? (
+            {!isFormActive ? (
                 <button
                     className="add-task-btn"
-
+                    onClick={()=>setIsFormActive(true)}
                 >
                     + Add Task
                 </button>
@@ -49,7 +51,7 @@ export function Board({ data, tasks, deleteTask }) {
                     ></textarea>
                     <div className="form-actions">
                         <button type="submit" className="btn-save">Save</button>
-                        <button type="button" className="btn-cancel cancel-task-btn" >Cancel</button>
+                        <button type="button" className="btn-cancel cancel-task-btn" onClick={()=>setIsFormActive(false)} >Cancel</button>
                     </div>
                 </form>
             )}
