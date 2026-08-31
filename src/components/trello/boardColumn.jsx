@@ -8,8 +8,10 @@ export function Board({ data, tasks, deleteTask, addTask }) {
         description: ''
     })
 
-    const handleSaveTask = () => {
-        //task add addTask()
+    const handleSaveTask = (e) => {
+        e.preventDefault();
+        addTask(form.title, form.description, data.value);
+        
     }
 
     return (
@@ -42,7 +44,7 @@ export function Board({ data, tasks, deleteTask, addTask }) {
                     + Add Task
                 </button>
             ) : (
-                <form className="inline-task-form" >
+                <form className="inline-task-form" onSubmit={handleSaveTask} >
                     <input
                         type="text"
                         name="title"

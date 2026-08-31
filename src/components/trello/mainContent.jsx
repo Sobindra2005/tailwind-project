@@ -17,13 +17,11 @@ export function MainContent() {
 
     function deleteTask(id) {
         const updatedTask = tasks.filter(task => task.id !== id)
-        console.log(updatedTask)
         setTask(updatedTask)
     }
 
     function addTask(title, description, status) {
-        const updatedTask = tasks.push({ id: Date.now(), title, description, status })
-        setTask(updatedTask)
+        setTask((prev) => [...prev, { id: Date.now(), title, description, status }])
     }
 
     return (
