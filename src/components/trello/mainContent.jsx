@@ -21,6 +21,11 @@ export function MainContent() {
         setTask(updatedTask)
     }
 
+    function addTask(title, description, status) {
+        const updatedTask = tasks.push({ id: Date.now(), title, description, status })
+        setTask(updatedTask)
+    }
+
     return (
         <main className="main-content">
             <header className="topbar border-b border-gray-700">
@@ -54,7 +59,7 @@ export function MainContent() {
             <section className="board-container" id="board">
                 {Boards.map(board => {
                     let boardTask = board.value === "todo" ? Todo : board.value === "in-progress" ? InProgress : Done
-                    return <Board key={board.value} data={board} tasks={boardTask} deleteTask={deleteTask} />
+                    return <Board key={board.value} data={board} tasks={boardTask} deleteTask={deleteTask} addTask={addTask} />
                 })}
             </section>
         </main>

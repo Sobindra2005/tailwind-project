@@ -1,8 +1,16 @@
 import { useState } from "react";
 import { TaskCard } from "./task";
 
-export function Board({ data, tasks, deleteTask }) {
+export function Board({ data, tasks, deleteTask, addTask }) {
     const [isFormActive, setIsFormActive] = useState(false)
+    const [form, setForm] = useState({
+        title: '',
+        description: ''
+    })
+
+    const handleSaveTask = () => {
+        //task add addTask()
+    }
 
     return (
         <div className={`board-column col-${data.value}`}>
@@ -29,7 +37,7 @@ export function Board({ data, tasks, deleteTask }) {
             {!isFormActive ? (
                 <button
                     className="add-task-btn"
-                    onClick={()=>setIsFormActive(true)}
+                    onClick={() => setIsFormActive(true)}
                 >
                     + Add Task
                 </button>
@@ -38,20 +46,27 @@ export function Board({ data, tasks, deleteTask }) {
                     <input
                         type="text"
                         name="title"
+                        value={form.title}
+                        onChange={(e) => setForm((prev) => {
+                            return { ...prev, title: e.target.value };
+                        })}
                         placeholder="Task title..."
-
                         required
                         autoFocus
                     />
                     <textarea
                         name="description"
                         rows="2"
+                        value={form.description}
+                        onChange={(e) => setForm((prev) => {
+                            return { ...prev, description: e.target.value };
+                        })}
                         placeholder="Task description..."
                         required
                     ></textarea>
                     <div className="form-actions">
                         <button type="submit" className="btn-save">Save</button>
-                        <button type="button" className="btn-cancel cancel-task-btn" onClick={()=>setIsFormActive(false)} >Cancel</button>
+                        <button type="button" className="btn-cancel cancel-task-btn" onClick={() => setIsFormActive(false)} >Cancel</button>
                     </div>
                 </form>
             )}
