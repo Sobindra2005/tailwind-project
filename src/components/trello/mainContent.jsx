@@ -12,7 +12,10 @@ export function MainContent() {
     const [tasks, setTask] = useState(initialTasks)
     const DraggedTaskId = useRef(null)
     const DragPreviewElement = useRef(null)
-    
+    const DragOffset = useRef({
+        x: 0, y: 0
+    })
+
     const Todo = tasks.filter(task => task.status === 'todo')
     const InProgress = tasks.filter(task => task.status === 'in-progress')
     const Done = tasks.filter(task => task.status === 'done')
@@ -40,8 +43,17 @@ export function MainContent() {
         setTask(updatedTask)
     }
 
+    const handleMainDragOver = (e) => {
+        console.log(e.clientX, e.clientY, DragPreviewElement)
+
+        DragPreviewElement.current.style.left = `${e.clientX - DragOffset.current.x}px`
+        DragPreviewElement.current.style.top = `${e.clientY - DragOffset.current.y}px`
+    }
+
     return (
-        <main className="main-content">
+        <main
+            onDragOver={handleMainDragOver}
+            className="main-content">
             <header className="topbar border-b border-gray-700">
                 <div className="search-bar">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -73,7 +85,7 @@ export function MainContent() {
             <section className="board-container" id="board">
                 {Boards.map(board => {
                     let boardTask = board.value === "todo" ? Todo : board.value === "in-progress" ? InProgress : Done
-                    return <Board key={board.value} DraggedTaskId={DraggedTaskId} data={board} DragPreviewElement={DragPreviewElement} tasks={boardTask} deleteTask={deleteTask} addTask={addTask} updateTaskStatus={updateTaskStatus} />
+                    return <Board key={board.value} DraggedTaskId={DraggedTaskId} DragOffset={DragOffset} data={board} DragPreviewElement={DragPreviewElement} tasks={boardTask} deleteTask={deleteTask} addTask={addTask} updateTaskStatus={updateTaskStatus} />
                 })}
             </section>
         </main>

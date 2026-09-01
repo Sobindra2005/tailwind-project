@@ -1,12 +1,23 @@
-export function TaskCard({ task, deleteTask, DraggedTaskId, DragPreviewElement }) {
+export function TaskCard({ task, deleteTask, DraggedTaskId, DragPreviewElement, DragOffset }) {
 
     const handleDrag = (e) => {
         DraggedTaskId.current = task.id
         const DragPreviewEl = e.currentTarget.cloneNode(true);
 
+        const realEl = e.currentTarget.getBoundingClientRect();
+
+        // console.log(realEl.left , realEl.top)
+
+        const offset = {
+            x: e.clientX - realEl.left,
+            y: e.clientY - realEl.top
+        }
+
+        DragOffset.current = offset
+
         DragPreviewEl.classList.add('is-drag-preview')
-        DragPreviewEl.style.top = '100px'
-        DragPreviewEl.style.left = '100px'
+        DragPreviewEl.style.width = `${realEl.width}px`
+        DragPreviewEl.style.height = `${realEl.height}px`
 
         DragPreviewElement.current = DragPreviewEl
         document.body.appendChild(DragPreviewEl)
@@ -14,6 +25,12 @@ export function TaskCard({ task, deleteTask, DraggedTaskId, DragPreviewElement }
 
     const handleDragEnd = () => {
         DraggedTaskId.current = null;
+
+        
+        if (!!DragPreviewElement.current) {
+            DragPreviewElement.current.remove();
+            DragPreviewElement.current = null;
+        }
     }
 
     return (
