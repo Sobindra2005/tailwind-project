@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { TaskCard } from "./task";
 
-export function Board({ data, tasks, deleteTask, addTask, updateTaskStatus , DraggedTaskId }) {
+export function Board({ data, tasks, deleteTask, addTask, updateTaskStatus, DraggedTaskId }) {
     const [isFormActive, setIsFormActive] = useState(false)
     const [form, setForm] = useState({
         title: '',
@@ -21,6 +21,7 @@ export function Board({ data, tasks, deleteTask, addTask, updateTaskStatus , Dra
 
     const handleDrop = () => {
         updateTaskStatus(DraggedTaskId.current, data.value)
+        setIsDragOver(false)
     }
 
     const handleDragOver = (e) => {
