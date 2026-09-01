@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { TaskCard } from "./task";
 
-export function Board({ data, tasks, deleteTask, addTask, updateTaskStatus, DraggedTaskId }) {
+export function Board({ data, tasks, deleteTask, addTask, updateTaskStatus, DraggedTaskId, DragPreviewElement }) {
     const [isFormActive, setIsFormActive] = useState(false)
     const [form, setForm] = useState({
         title: '',
@@ -22,6 +22,11 @@ export function Board({ data, tasks, deleteTask, addTask, updateTaskStatus, Drag
     const handleDrop = () => {
         updateTaskStatus(DraggedTaskId.current, data.value)
         setIsDragOver(false)
+
+        if (!!DragPreviewElement.current) {
+            DragPreviewElement.current.remove();
+            DragPreviewElement.current = null;
+        }
     }
 
     const handleDragOver = (e) => {
@@ -52,7 +57,7 @@ export function Board({ data, tasks, deleteTask, addTask, updateTaskStatus, Drag
                 {tasks.length === 0 ? (
                     <p className="empty-state">No tasks yet.</p>
                 ) : (
-                    <>{tasks.map(task => <TaskCard key={task.id} DraggedTaskId={DraggedTaskId} task={task} deleteTask={deleteTask} />)
+                    <>{tasks.map(task => <TaskCard key={task.id} DragPreviewElement={DragPreviewElement} DraggedTaskId={DraggedTaskId} task={task} deleteTask={deleteTask} />)
                     }
                     </>
                 )}

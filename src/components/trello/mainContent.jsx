@@ -11,6 +11,7 @@ const Boards = [
 export function MainContent() {
     const [tasks, setTask] = useState(initialTasks)
     const DraggedTaskId = useRef(null)
+    const DragPreviewElement = useRef(null)
     
     const Todo = tasks.filter(task => task.status === 'todo')
     const InProgress = tasks.filter(task => task.status === 'in-progress')
@@ -72,7 +73,7 @@ export function MainContent() {
             <section className="board-container" id="board">
                 {Boards.map(board => {
                     let boardTask = board.value === "todo" ? Todo : board.value === "in-progress" ? InProgress : Done
-                    return <Board key={board.value} DraggedTaskId={DraggedTaskId} data={board} tasks={boardTask} deleteTask={deleteTask} addTask={addTask} updateTaskStatus={updateTaskStatus} />
+                    return <Board key={board.value} DraggedTaskId={DraggedTaskId} data={board} DragPreviewElement={DragPreviewElement} tasks={boardTask} deleteTask={deleteTask} addTask={addTask} updateTaskStatus={updateTaskStatus} />
                 })}
             </section>
         </main>

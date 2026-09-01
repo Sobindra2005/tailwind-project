@@ -1,17 +1,24 @@
-export function TaskCard({ task, deleteTask, DraggedTaskId }) {
+export function TaskCard({ task, deleteTask, DraggedTaskId, DragPreviewElement }) {
 
-    const handleDrag = () => {
-        console.log("this is running")
+    const handleDrag = (e) => {
         DraggedTaskId.current = task.id
-        console.log(DraggedTaskId)
+        const DragPreviewEl = e.currentTarget.cloneNode(true);
+
+        DragPreviewEl.classList.add('is-drag-preview')
+        DragPreviewEl.style.top = '100px'
+        DragPreviewEl.style.left = '100px'
+
+        DragPreviewElement.current = DragPreviewEl
+        document.body.appendChild(DragPreviewEl)
     }
 
     const handleDragEnd = () => {
-        // DraggedTaskId.current = null;
+        DraggedTaskId.current = null;
     }
 
     return (
         <div
+            id="element-target"
             draggable
             className={`task-card `}
             onDragStart={handleDrag}
