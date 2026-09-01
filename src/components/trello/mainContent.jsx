@@ -37,7 +37,6 @@ export function MainContent() {
             return task;
         })
         setTask(updatedTask)
-
     }
 
     return (

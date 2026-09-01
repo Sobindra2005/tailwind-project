@@ -7,7 +7,6 @@ export function Board({ data, tasks, deleteTask, addTask, updateTaskStatus , Dra
         title: '',
         description: ''
     })
-    
     const [isDragOver, setIsDragOver] = useState(false)
 
     const handleSaveTask = (e) => {
@@ -21,7 +20,6 @@ export function Board({ data, tasks, deleteTask, addTask, updateTaskStatus , Dra
     }
 
     const handleDrop = () => {
-        console.log(DraggedTaskId, data.value)
         updateTaskStatus(DraggedTaskId.current, data.value)
     }
 
@@ -30,7 +28,7 @@ export function Board({ data, tasks, deleteTask, addTask, updateTaskStatus , Dra
         setIsDragOver(true)
     }
 
-    const handleDragEnd = () => {
+    const handleDragLeave = () => {
         setIsDragOver(false)
     }
 
@@ -47,7 +45,7 @@ export function Board({ data, tasks, deleteTask, addTask, updateTaskStatus , Dra
             <div
                 className={`task-list ${isDragOver ? 'drop-target' : ''}`}
                 onDragOver={handleDragOver}
-                onDragEnd={handleDragEnd}
+                onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
             >
                 {tasks.length === 0 ? (
