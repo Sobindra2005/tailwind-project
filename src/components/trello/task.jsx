@@ -1,12 +1,12 @@
-export function TaskCard({ task, deleteTask, DraggedTaskId, DragPreviewElement, DragOffset }) {
+import { useState } from "react";
 
+export function TaskCard({ task, deleteTask, DraggedTaskId, DragPreviewElement, DragOffset }) {
+    const [isDragging, setIsDragging] = useState(false)
     const handleDrag = (e) => {
         DraggedTaskId.current = task.id
         const DragPreviewEl = e.currentTarget.cloneNode(true);
 
         const realEl = e.currentTarget.getBoundingClientRect();
-
-        // console.log(realEl.left , realEl.top)
 
         const offset = {
             x: e.clientX - realEl.left,
@@ -21,12 +21,14 @@ export function TaskCard({ task, deleteTask, DraggedTaskId, DragPreviewElement, 
 
         DragPreviewElement.current = DragPreviewEl
         document.body.appendChild(DragPreviewEl)
+
+        setIsDragging(true)
     }
 
     const handleDragEnd = () => {
         DraggedTaskId.current = null;
+        setIsDragging(false)
 
-        
         if (!!DragPreviewElement.current) {
             DragPreviewElement.current.remove();
             DragPreviewElement.current = null;
@@ -35,9 +37,9 @@ export function TaskCard({ task, deleteTask, DraggedTaskId, DragPreviewElement, 
 
     return (
         <div
-            id="element-target"
+
             draggable
-            className={`task-card `}
+            className={`task-card ${isDragging ? 'is-placeholder' : ''}`}
             onDragStart={handleDrag}
             onDragEnd={handleDragEnd}
         >

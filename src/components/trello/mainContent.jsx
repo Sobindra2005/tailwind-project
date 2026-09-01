@@ -44,8 +44,6 @@ export function MainContent() {
     }
 
     const handleMainDragOver = (e) => {
-        console.log(e.clientX, e.clientY, DragPreviewElement)
-
         DragPreviewElement.current.style.left = `${e.clientX - DragOffset.current.x}px`
         DragPreviewElement.current.style.top = `${e.clientY - DragOffset.current.y}px`
     }

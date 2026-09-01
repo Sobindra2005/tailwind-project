@@ -31,7 +31,6 @@ export function Board({ data, tasks, deleteTask, addTask, updateTaskStatus, Drag
 
     const handleDragOver = (e) => {
         e.preventDefault()
-        console.log("this is running")
         setIsDragOver(true)
     }
 
