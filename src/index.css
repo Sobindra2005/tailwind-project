@@ -1,14 +1,1 @@
 @import "tailwindcss";
-
-@theme {
-  --breakpoint-sm : 320px;
-  --breakpoint-gl : 2000px;
-  --color-naya-color: #5c093ba3
-}
-
-
-@utility custom-utility {
-  display: flex;
-  flex-direction: row;
-  background-color: blue;
-}
